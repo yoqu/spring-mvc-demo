@@ -10,6 +10,8 @@ default-lazy-init="true">
 	<context:component-scan base-package="cn.jxufe" />
 
 
+
+
 	<bean id="utf8StringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
@@ -26,6 +28,15 @@ default-lazy-init="true">
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
+	<bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionAttribute" value="ex"></property>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.NullPointerException">error/error</prop>
+			</props>
+		</property>
+	</bean>
+
     <!-- 当配置了<mvc:annotation-driven/>后，会自动加载org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping和org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter，所以如果显示的配置则需去掉配置<mvc:annotation-driven/> -->
-	<!--<mvc:annotation-driven/>-->
+	<mvc:annotation-driven/>
 </beans>
